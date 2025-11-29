@@ -172,9 +172,9 @@ public class AutoMoan extends BlackOutModule {
         if (!mc.world.getPlayers().isEmpty()) {
             for (PlayerEntity player : mc.world.getPlayers()) {
                 if (player != mc.player && (!iFriends.get() || !Friends.get().isFriend(player))) {
-                    if (closest == null || mc.player.getPos().distanceTo(player.getPos()) < distance) {
+                    if (closest == null || mc.player.getEntityPos().distanceTo(player.getEntityPos()) < distance) {
                         closest = player;
-                        distance = (float) mc.player.getPos().distanceTo(player.getPos());
+                        distance = (float) mc.player.getEntityPos().distanceTo(player.getEntityPos());
                     }
                 }
             }

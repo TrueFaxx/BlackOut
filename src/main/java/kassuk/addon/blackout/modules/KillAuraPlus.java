@@ -219,7 +219,7 @@ public class KillAuraPlus extends BlackOutModule {
             double val = switch (targetMode.get()) {
                 case Health -> 10000 - player.getHealth() - player.getAbsorptionAmount();
                 case Angle -> 10000 - Math.abs(RotationUtils.yawAngle(mc.player.getYaw(), Rotations.getYaw(player)));
-                case Distance -> 10000 - mc.player.getPos().distanceTo(player.getPos());
+                case Distance -> 10000 - mc.player.getEntityPos().distanceTo(player.getEntityPos());
             };
             if (val > value) {
                 target = player;

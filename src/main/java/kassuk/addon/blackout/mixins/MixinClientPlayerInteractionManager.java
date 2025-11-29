@@ -69,7 +69,7 @@ public abstract class MixinClientPlayerInteractionManager {
             blockState.onBlockBreakStart(client.world, position, client.player);
         }
 
-        if (bl && blockState.calcBlockBreakingDelta(client.player, client.player.getWorld(), position) >= 1.0F) {
+        if (bl && blockState.calcBlockBreakingDelta(client.player, client.player.getEntityWorld(), position) >= 1.0F) {
             breakBlock(position);
         } else {
             breakingBlock = true;

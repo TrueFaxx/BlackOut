@@ -439,8 +439,8 @@ public class AutoPvp extends BlackOutModule {
         for (BlockPos pos : hole.positions) {
             if (closest == null ||
                 (target != null &&
-                    pos.toCenterPos().distanceTo(target.getPos()) <
-                        closest.toCenterPos().distanceTo(target.getPos()))) {
+                    pos.toCenterPos().distanceTo(target.getEntityPos()) <
+                        closest.toCenterPos().distanceTo(target.getEntityPos()))) {
                 closest = pos;
             }
         }

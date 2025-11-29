@@ -1001,9 +1001,9 @@ public class AutoCrystalPlus extends BlackOutModule {
                 if (inhibitList.contains(en.getId())) continue;
                 if (switchTimer > 0) continue;
 
-                double[] dmg = getDmg(en.getPos(), true)[0];
+                double[] dmg = getDmg(en.getEntityPos(), true)[0];
 
-                if (!canExplode(en.getPos())) continue;
+                if (!canExplode(en.getEntityPos())) continue;
 
                 if ((expEntity == null || value == null) || ((dmgCheckMode.get().equals(DmgCheckMode.Normal) && dmg[0] > value[0]) || (dmgCheckMode.get().equals(DmgCheckMode.Safe) && dmg[2] / dmg[0] < value[2] / dmg[0]))) {
                     expEntity = en;
@@ -1015,7 +1015,7 @@ public class AutoCrystalPlus extends BlackOutModule {
         if (expEntity != null) {
             if (multiTaskCheck() && !isAttacked(expEntity.getId()) && attackDelayCheck() && existedCheck(expEntity.getBlockPos())) {
                 if (!SettingUtils.shouldRotate(RotationType.Attacking) || startAttackRot()) {
-                    explode(expEntity.getId(), expEntity.getPos());
+                    explode(expEntity.getId(), expEntity.getEntityPos());
                 }
             }
         } else if (SettingUtils.shouldRotate(RotationType.Attacking)) Managers.ROTATION.end(Objects.hash(name + "attacking"));
@@ -1029,7 +1029,7 @@ public class AutoCrystalPlus extends BlackOutModule {
     }
 
     private boolean startAttackRot() {
-        return (Managers.ROTATION.start(expEntity.getBoundingBox(), smartRot.get() ? expEntity.getPos() : null, priority + (!isAttacked(expEntity.getId()) && blocksPlacePos(expEntity) ? -0.1 : 0.1), RotationType.Attacking, Objects.hash(name + "attacking")));
+        return (Managers.ROTATION.start(expEntity.getBoundingBox(), smartRot.get() ? expEntity.getEntityPos() : null, priority + (!isAttacked(expEntity.getId()) && blocksPlacePos(expEntity) ? -0.1 : 0.1), RotationType.Attacking, Objects.hash(name + "attacking")));
     }
 
     private boolean blocksPlacePos(Entity entity) {
@@ -1456,7 +1456,7 @@ public class AutoCrystalPlus extends BlackOutModule {
     }
 
     private boolean validForIntersect(Entity entity) {
-        if (entity instanceof EndCrystalEntity && canExplodePlacing(entity.getPos()))
+        if (entity instanceof EndCrystalEntity && canExplodePlacing(entity.getEntityPos()))
             return false;
 
         return !(entity instanceof PlayerEntity) || !entity.isSpectator();

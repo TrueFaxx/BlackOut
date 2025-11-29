@@ -239,11 +239,11 @@ public class AntiAim extends BlackOutModule {
 
             if (closest == null) closest = pl;
 
-            double distance = mc.player.getPos().distanceTo(pl.getPos());
+            double distance = mc.player.getEntityPos().distanceTo(pl.getEntityPos());
 
             if (distance > enemyRange.get()) continue;
 
-            if (distance < closest.getPos().distanceTo(mc.player.getPos())) {
+            if (distance < closest.getEntityPos().distanceTo(mc.player.getEntityPos())) {
                 closest = pl;
             }
         }

@@ -887,7 +887,7 @@ public class AutoMine extends BlackOutModule {
         double distance = 1000;
         for (AbstractClientPlayerEntity player : enemies) {
             for (Direction dir : Direction.Type.HORIZONTAL) {
-                BlockPos pos = getPos(player.getPos()).offset(dir);
+                BlockPos pos = getPos(player.getEntityPos()).offset(dir);
 
                 if (!(civ && pos.equals(civPos)) && getBlock(pos) != Blocks.OBSIDIAN) {
                     continue;
@@ -934,7 +934,7 @@ public class AutoMine extends BlackOutModule {
         double distance = 1000;
         for (AbstractClientPlayerEntity player : enemies) {
             for (Direction dir : Direction.Type.HORIZONTAL) {
-                BlockPos pos = getPos(player.getPos()).offset(dir);
+                BlockPos pos = getPos(player.getEntityPos()).offset(dir);
 
                 if (((!civ || !pos.equals(civPos)) && !OLEPOSSUtils.solid2(pos)) || getBlock(pos) == Blocks.BEDROCK) {
                     continue;
@@ -961,7 +961,7 @@ public class AutoMine extends BlackOutModule {
         double distance = 1000;
         for (AbstractClientPlayerEntity player : enemies) {
             for (Direction dir : Direction.Type.HORIZONTAL) {
-                BlockPos pos = getPos(player.getPos()).offset(dir);
+                BlockPos pos = getPos(player.getEntityPos()).offset(dir);
 
                 if (((!civ || !pos.equals(civPos)) && !OLEPOSSUtils.solid2(pos)) || getBlock(pos) == Blocks.BEDROCK) {
                     continue;
@@ -1003,7 +1003,7 @@ public class AutoMine extends BlackOutModule {
         Target best = null;
         double distance = 1000;
         for (AbstractClientPlayerEntity player : enemies) {
-            BlockPos pos = getPos(player.getPos());
+            BlockPos pos = getPos(player.getEntityPos());
 
             if (!OLEPOSSUtils.solid2(pos) || getBlock(pos) == Blocks.BEDROCK) {
                 continue;

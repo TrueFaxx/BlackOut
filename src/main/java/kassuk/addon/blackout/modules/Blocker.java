@@ -448,7 +448,7 @@ public class Blocker extends BlackOutModule {
             for (BlockPos pos : placePositions) {
                 if (!Box.from(new BlockBox(pos)).intersects(entity.getBoundingBox())) continue;
 
-                double dmg = BODamageUtils.crystalDamage(mc.player, mc.player.getBoundingBox(), entity.getPos(), null, false);
+                double dmg = BODamageUtils.crystalDamage(mc.player, mc.player.getBoundingBox(), entity.getEntityPos(), null, false);
                 if (dmg < lowest) {
                     crystal = entity;
                     lowest = dmg;

@@ -431,7 +431,7 @@ public class BedAuraPlus extends BlackOutModule {
 
     private boolean inRangeToTargets(BlockPos pos) {
         for (PlayerEntity target : targets) {
-            if (target.getPos().add(0, 1, 0).distanceTo(pos.toCenterPos()) < 3.5) {
+            if (target.getEntityPos().add(0, 1, 0).distanceTo(pos.toCenterPos()) < 3.5) {
                 return true;
             }
         }

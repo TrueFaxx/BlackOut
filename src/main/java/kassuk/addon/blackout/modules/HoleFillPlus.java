@@ -446,7 +446,7 @@ public class HoleFillPlus extends BlackOutModule {
         for (AbstractClientPlayerEntity player : mc.world.getPlayers()) {
             Movement m = new Movement(
                 MathHelper.wrapDegrees((float)Math.toDegrees(Math.atan2(player.getZ() - player.lastZ, player.getX() - player.lastX)) - 90f),
-                player.getPos()
+                player.getEntityPos()
             );
             if (!walkAngles.containsKey(player)) {
                 List<Movement> l = new ArrayList<>();
@@ -537,7 +537,7 @@ public class HoleFillPlus extends BlackOutModule {
     }
 
     private boolean validHole(Hole hole) {
-        double pDist = (nearPosition.containsKey(mc.player) ? feet(nearPosition.get(mc.player)) : mc.player.getPos()).distanceTo(hole.middle);
+        double pDist = (nearPosition.containsKey(mc.player) ? feet(nearPosition.get(mc.player)) : mc.player.getEntityPos()).distanceTo(hole.middle);
 
         if (selfCheck(hole)) return false;
 
@@ -563,7 +563,7 @@ public class HoleFillPlus extends BlackOutModule {
         if (iSelfHole.get() && (HoleUtils.inHole(mc.player) || OLEPOSSUtils.collidable(pos))) return false;
         if (selfAbove.get() && mc.player.getY() <= hole.middle.y) return false;
 
-        return mc.player.getPos().distanceTo(hole.middle) <= selfDistance.get();
+        return mc.player.getEntityPos().distanceTo(hole.middle) <= selfDistance.get();
     }
 
     private boolean nearCheck(AbstractClientPlayerEntity player, Hole hole, double pDist) {
@@ -574,7 +574,7 @@ public class HoleFillPlus extends BlackOutModule {
 
         if (above.get() && player.getY() <= hole.middle.y) return false;
 
-        double eDist = (nearPosition.containsKey(player) ? feet(nearPosition.get(player)) : player.getPos()).distanceTo(hole.middle);
+        double eDist = (nearPosition.containsKey(player) ? feet(nearPosition.get(player)) : player.getEntityPos()).distanceTo(hole.middle);
         if (eDist > nearDistance.get()) return false;
 
         return !efficient.get() || pDist >= eDist;
@@ -597,7 +597,7 @@ public class HoleFillPlus extends BlackOutModule {
             if (m.vec().distanceTo(hole.middle) > dist) continue;
 
             double yawToHole = RotationUtils.getYaw(m.vec(), hole.middle);
-            double highestAngle = MathHelper.lerp(Math.min(player.getPos().distanceTo(hole.middle) / 8, 1), 90, 0);
+            double highestAngle = MathHelper.lerp(Math.min(player.getEntityPos().distanceTo(hole.middle) / 8, 1), 90, 0);
             if (Math.abs(RotationUtils.yawAngle(yawToHole, m.movementAngle)) < highestAngle) return true;
         }
         return false;
@@ -614,7 +614,7 @@ public class HoleFillPlus extends BlackOutModule {
             if (l.vec().distanceTo(hole.middle) > lookDist.get()) continue;
 
             double yawToHole = RotationUtils.getYaw(l.vec(), hole.middle);
-            double highestAngle = MathHelper.lerp(Math.min(player.getPos().distanceTo(hole.middle) / 20, 1), 35, 5);
+            double highestAngle = MathHelper.lerp(Math.min(player.getEntityPos().distanceTo(hole.middle) / 20, 1), 35, 5);
             if (Math.abs(RotationUtils.yawAngle(yawToHole, l.yaw)) < highestAngle &&
                 Math.abs(RotationUtils.getPitch(l.vec, hole.middle) - l.pitch()) < highestAngle) return true;
         }

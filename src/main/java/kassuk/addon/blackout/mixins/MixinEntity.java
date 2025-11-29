@@ -33,7 +33,7 @@ public abstract class MixinEntity {
     public abstract Text getName();
 
     @Shadow
-    public abstract World getWorld();
+    public abstract World getEntityWorld();
 
     @Shadow
     public abstract ActionResult interact(PlayerEntity player, Hand hand);
@@ -62,24 +62,24 @@ public abstract class MixinEntity {
         active = active && System.currentTimeMillis() - step.lastStep > step.cooldown.get() * 1000;
 
         Box box = this.getBoundingBox();
-        List<VoxelShape> list = this.getWorld().getEntityCollisions(entity, box.stretch(movement));
-        Vec3d vec3d = movement.lengthSquared() == 0.0 ? movement : Entity.adjustMovementForCollisions(entity, movement, box, this.getWorld(), list);
+        List<VoxelShape> list = this.getEntityWorld().getEntityCollisions(entity, box.stretch(movement));
+        Vec3d vec3d = movement.lengthSquared() == 0.0 ? movement : Entity.adjustMovementForCollisions(entity, movement, box, this.getEntityWorld(), list);
         boolean bl = movement.x != vec3d.x;
         boolean bl2 = movement.y != vec3d.y;
         boolean bl3 = movement.z != vec3d.z;
         boolean bl4 = this.isOnGround() || (!active && bl2 && movement.y < 0.0);
         if ((active ? step.height.get() : this.getStepHeight()) > 0.0F && bl4 && (bl || bl3)) {
-            Vec3d vec3d2 = Entity.adjustMovementForCollisions(entity, new Vec3d(movement.x, active ? step.height.get() : this.getStepHeight(), movement.z), box, this.getWorld(), list);
-            Vec3d vec3d3 = Entity.adjustMovementForCollisions(entity, new Vec3d(0.0, active ? step.height.get() : this.getStepHeight(), 0.0), box.stretch(movement.x, 0.0, movement.z), this.getWorld(), list);
+            Vec3d vec3d2 = Entity.adjustMovementForCollisions(entity, new Vec3d(movement.x, active ? step.height.get() : this.getStepHeight(), movement.z), box, this.getEntityWorld(), list);
+            Vec3d vec3d3 = Entity.adjustMovementForCollisions(entity, new Vec3d(0.0, active ? step.height.get() : this.getStepHeight(), 0.0), box.stretch(movement.x, 0.0, movement.z), this.getEntityWorld(), list);
             if (vec3d3.y < (active ? step.height.get() : this.getStepHeight())) {
-                Vec3d vec3d4 = Entity.adjustMovementForCollisions(entity, new Vec3d(movement.x, 0.0, movement.z), box.offset(vec3d3), this.getWorld(), list).add(vec3d3);
+                Vec3d vec3d4 = Entity.adjustMovementForCollisions(entity, new Vec3d(movement.x, 0.0, movement.z), box.offset(vec3d3), this.getEntityWorld(), list).add(vec3d3);
                 if (vec3d4.horizontalLengthSquared() > vec3d2.horizontalLengthSquared()) {
                     vec3d2 = vec3d4;
                 }
             }
 
             if (vec3d2.horizontalLengthSquared() > vec3d.horizontalLengthSquared()) {
-                Vec3d v = vec3d2.add(Entity.adjustMovementForCollisions(entity, new Vec3d(0.0, -vec3d2.y + movement.y, 0.0), box.offset(vec3d2), entity.getWorld(), list));
+                Vec3d v = vec3d2.add(Entity.adjustMovementForCollisions(entity, new Vec3d(0.0, -vec3d2.y + movement.y, 0.0), box.offset(vec3d2), entity.getEntityWorld(), list));
                 if (active) step.step(step.getOffsets(v.y));
                 cir.setReturnValue(v);
                 return;

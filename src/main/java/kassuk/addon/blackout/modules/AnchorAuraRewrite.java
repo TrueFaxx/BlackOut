@@ -519,7 +519,7 @@ public class AnchorAuraRewrite extends BlackOutModule {
 
     private boolean inRangeToTargets(BlockPos pos) {
         for (AbstractClientPlayerEntity target : targets) {
-            if (target.getPos().add(0, 1, 0).distanceTo(Vec3d.ofCenter(pos)) < 3.5) return true;
+            if (target.getEntityPos().add(0, 1, 0).distanceTo(Vec3d.ofCenter(pos)) < 3.5) return true;
         }
         return false;
     }

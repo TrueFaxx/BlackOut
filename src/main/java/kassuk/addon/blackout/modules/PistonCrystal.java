@@ -468,7 +468,7 @@ public class PistonCrystal extends BlackOutModule {
                 continue;
             }
 
-            double d = mc.player.getEyePos().distanceTo(c.getPos());
+            double d = mc.player.getEyePos().distanceTo(c.getEntityPos());
 
             if (d < cd) {
                 cd = d;
@@ -779,8 +779,8 @@ public class PistonCrystal extends BlackOutModule {
         resetPos();
 
         mc.world.getPlayers().stream()
-            .filter(player -> player != mc.player && player.getPos().distanceTo(mc.player.getPos()) < 10 && player.getHealth() > 0 && !Friends.get().isFriend(player) && !player.isSpectator())
-            .sorted(Comparator.comparingDouble(i -> i.getPos().distanceTo(mc.player.getPos()))).forEach(player -> {
+            .filter(player -> player != mc.player && player.getEntityPos().distanceTo(mc.player.getEntityPos()) < 10 && player.getHealth() > 0 && !Friends.get().isFriend(player) && !player.isSpectator())
+            .sorted(Comparator.comparingDouble(i -> i.getEntityPos().distanceTo(mc.player.getEntityPos()))).forEach(player -> {
 
                 if (crystalPos == null) {
                     update(player, true);
@@ -802,7 +802,7 @@ public class PistonCrystal extends BlackOutModule {
             resetPos();
             BlockPos cPos = top ? BlockPos.ofFloored(player.getEyePos()).offset(dir).up() : BlockPos.ofFloored(player.getEyePos()).offset(dir);
 
-            d = cPos.toCenterPos().distanceTo(mc.player.getPos());
+            d = cPos.toCenterPos().distanceTo(mc.player.getEntityPos());
             if (!cPos.equals(lastCrystalPos) && d > cd) continue;
 
             Block b = mc.world.getBlockState(cPos).getBlock();

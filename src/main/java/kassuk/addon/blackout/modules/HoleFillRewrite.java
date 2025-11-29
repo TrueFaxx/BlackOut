@@ -325,7 +325,7 @@ public class HoleFillRewrite extends BlackOutModule {
                         double closest = closestDist(p);
 
                         PlaceData d = SettingUtils.getPlaceData(p);
-                        if (d.valid() && closest >= 0 && closest <= holeRange.get() && (!efficient.get() || mc.player.getPos().distanceTo(Vec3d.ofCenter(p)) > closest)) {
+                        if (d.valid() && closest >= 0 && closest <= holeRange.get() && (!efficient.get() || mc.player.getEntityPos().distanceTo(Vec3d.ofCenter(p)) > closest)) {
                             if (SettingUtils.inPlaceRange(d.pos())) {
                                 holes.add(p);
                             }
@@ -339,7 +339,7 @@ public class HoleFillRewrite extends BlackOutModule {
     private double closestDist(BlockPos pos) {
         double closest = -1;
         for (PlayerEntity pl : mc.world.getPlayers()) {
-            double dist = pl.getPos().distanceTo(Vec3d.ofCenter(pos));
+            double dist = pl.getEntityPos().distanceTo(Vec3d.ofCenter(pos));
 
             if (/* In hole check */ (!iHole.get() || !inHole(pl)) &&
                 /* Above Check */ (!above.get() || pl.getY() > pos.getY()) &&

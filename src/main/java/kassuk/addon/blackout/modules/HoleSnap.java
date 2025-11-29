@@ -272,8 +272,8 @@ public class HoleSnap extends BlackOutModule {
                         return hole;
                     }
                     if (closest == null ||
-                        hole.middle.distanceTo(mc.player.getPos()) <
-                            closest.middle.distanceTo(mc.player.getPos())) {
+                        hole.middle.distanceTo(mc.player.getEntityPos()) <
+                            closest.middle.distanceTo(mc.player.getEntityPos())) {
                         closest = hole;
                     }
                 }

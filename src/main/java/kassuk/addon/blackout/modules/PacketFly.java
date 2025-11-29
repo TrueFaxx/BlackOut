@@ -264,7 +264,7 @@ public class PacketFly extends BlackOutModule {
 
             offset = offset.add(strictVertical.get() && yOffset != 0 ? 0 : x, yOffset, strictVertical.get() && yOffset != 0 ? 0 : z);
 
-            send(offset.add(mc.player.getPos()), getBounds(), getOnGround());
+            send(offset.add(mc.player.getEntityPos()), getBounds(), getOnGround());
 
             if (x == 0 && z == 0 && y == 0) {
                 break;

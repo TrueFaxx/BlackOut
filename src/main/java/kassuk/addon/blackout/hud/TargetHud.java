@@ -15,10 +15,10 @@ import meteordevelopment.orbit.EventHandler;
 import net.minecraft.client.gui.PlayerSkinDrawer;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.network.PlayerListEntry;
-import net.minecraft.client.util.SkinTextures;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.SkinTextures;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.s2c.play.EntityStatusS2CPacket;
 import net.minecraft.util.math.MathHelper;
@@ -447,7 +447,7 @@ public class TargetHud extends HudElement {
         if (target != null) {
             renderName = target.getName().getString();
             renderHealth = target.getHealth() + target.getAbsorptionAmount();
-            renderSkinTextures = target.getSkinTextures();
+            renderSkinTextures = target.getSkin();
 
             PlayerListEntry playerListEntry = mc.getNetworkHandler().getPlayerListEntry(target.getUuid());
             renderPing = playerListEntry == null ? -1 : playerListEntry.getLatency();

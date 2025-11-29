@@ -29,7 +29,7 @@ public class MovementUtils {
     public static void moveTowards(Vec3d movement, double baseSpeed, Vec3d vec, int step, int reverseStep) {
         double speed = getSpeed(baseSpeed);
 
-        double yaw = RotationUtils.getYaw(mc.player.getPos(), vec);
+        double yaw = RotationUtils.getYaw(mc.player.getEntityPos(), vec);
 
         double xm = xMovement(speed, yaw);
         double zm = zMovement(speed, yaw);

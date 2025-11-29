@@ -74,22 +74,22 @@ public class StepPlus extends BlackOutModule {
 
     public void slowStep(Entity entity, Vec3d movement, CallbackInfoReturnable<Vec3d> cir) {
         Box box = entity.getBoundingBox();
-        List<VoxelShape> list = entity.getWorld().getEntityCollisions(entity, box.stretch(movement));
-        Vec3d vec3d = movement.lengthSquared() == 0.0 ? movement : Entity.adjustMovementForCollisions(entity, movement, box, entity.getWorld(), list);
+        List<VoxelShape> list = entity.getEntityWorld().getEntityCollisions(entity, box.stretch(movement));
+        Vec3d vec3d = movement.lengthSquared() == 0.0 ? movement : Entity.adjustMovementForCollisions(entity, movement, box, entity.getEntityWorld(), list);
 
         if ((movement.x != vec3d.x || movement.z != vec3d.z) || stepping) {
             if (entity.isOnGround() && !stepping && System.currentTimeMillis() - lastStep > cooldown.get() * 1000) {
-                Vec3d vec3d2 = Entity.adjustMovementForCollisions(entity, new Vec3d(movement.x, height.get(), movement.z), box, entity.getWorld(), list);
-                Vec3d vec3d3 = Entity.adjustMovementForCollisions(entity, new Vec3d(0.0, height.get(), 0.0), box.stretch(movement.x, 0.0, movement.z), entity.getWorld(), list);
+                Vec3d vec3d2 = Entity.adjustMovementForCollisions(entity, new Vec3d(movement.x, height.get(), movement.z), box, entity.getEntityWorld(), list);
+                Vec3d vec3d3 = Entity.adjustMovementForCollisions(entity, new Vec3d(0.0, height.get(), 0.0), box.stretch(movement.x, 0.0, movement.z), entity.getEntityWorld(), list);
                 if (vec3d3.y < height.get()) {
-                    Vec3d vec3d4 = Entity.adjustMovementForCollisions(entity, new Vec3d(movement.x, 0.0, movement.z), box.offset(vec3d3), entity.getWorld(), list).add(vec3d3);
+                    Vec3d vec3d4 = Entity.adjustMovementForCollisions(entity, new Vec3d(movement.x, 0.0, movement.z), box.offset(vec3d3), entity.getEntityWorld(), list).add(vec3d3);
                     if (vec3d4.horizontalLengthSquared() > vec3d2.horizontalLengthSquared()) {
                         vec3d2 = vec3d4;
                     }
                 }
 
                 if (vec3d2.horizontalLengthSquared() > vec3d.horizontalLengthSquared()) {
-                    Vec3d vec = vec3d2.add(Entity.adjustMovementForCollisions(entity, new Vec3d(0.0, -vec3d2.y + movement.y, 0.0), box.offset(vec3d2), entity.getWorld(), list));
+                    Vec3d vec = vec3d2.add(Entity.adjustMovementForCollisions(entity, new Vec3d(0.0, -vec3d2.y + movement.y, 0.0), box.offset(vec3d2), entity.getEntityWorld(), list));
 
                     double[] o = getOffsets(vec.y);
 
@@ -119,10 +119,10 @@ public class StepPlus extends BlackOutModule {
 
                 Vec3d vec3d4;
                 if (!strict.get() || index > 1) {
-                    Vec3d vec3d3 = Entity.adjustMovementForCollisions(entity, new Vec3d(0, offset, 0), box.stretch(0, 0.0, 0), entity.getWorld(), list);
-                    vec3d4 = Entity.adjustMovementForCollisions(entity, new Vec3d(movement.x, 0.0, movement.z), box.offset(vec3d3), entity.getWorld(), list).add(vec3d3);
+                    Vec3d vec3d3 = Entity.adjustMovementForCollisions(entity, new Vec3d(0, offset, 0), box.stretch(0, 0.0, 0), entity.getEntityWorld(), list);
+                    vec3d4 = Entity.adjustMovementForCollisions(entity, new Vec3d(movement.x, 0.0, movement.z), box.offset(vec3d3), entity.getEntityWorld(), list).add(vec3d3);
                 } else {
-                    vec3d4 = Entity.adjustMovementForCollisions(entity, new Vec3d(0, offset, 0), box.stretch(0, 0.0, 0), entity.getWorld(), list);
+                    vec3d4 = Entity.adjustMovementForCollisions(entity, new Vec3d(0, offset, 0), box.stretch(0, 0.0, 0), entity.getEntityWorld(), list);
                 }
 
                 cir.setReturnValue(vec3d4);

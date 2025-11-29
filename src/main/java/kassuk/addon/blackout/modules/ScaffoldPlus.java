@@ -384,7 +384,7 @@ public class ScaffoldPlus extends BlackOutModule {
     private List<BlockPos> getBlocks() {
         List<BlockPos> list = new ArrayList<>();
 
-        Vec3d vec = mc.player.getPos();
+        Vec3d vec = mc.player.getEntityPos();
         for (int i = 0; i < extrapolation.get() * 10; i++) {
             vec = vec.add(motion.x / 10, 0, motion.z / 10);
 

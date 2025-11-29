@@ -320,7 +320,7 @@ public class AutoEz extends BlackOutModule {
                 Entity entity = packet.getEntity(mc.world);
                 if (pop.get() && mc.player != null && mc.world != null && entity instanceof PlayerEntity) {
                     if (entity != mc.player && !Friends.get().isFriend((PlayerEntity) entity) &&
-                        mc.player.getPos().distanceTo(entity.getPos()) <= range.get()) {
+                        mc.player.getEntityPos().distanceTo(entity.getEntityPos()) <= range.get()) {
                         sendPopMessage(entity.getName().getString());
                     }
                 }
@@ -331,7 +331,7 @@ public class AutoEz extends BlackOutModule {
     @SuppressWarnings("DataFlowIssue")
     private boolean anyDead(double range) {
         for (PlayerEntity pl : mc.world.getPlayers()) {
-            if (pl != mc.player && !Friends.get().isFriend(pl) && pl.getPos().distanceTo(mc.player.getPos()) <= range
+            if (pl != mc.player && !Friends.get().isFriend(pl) && pl.getEntityPos().distanceTo(mc.player.getEntityPos()) <= range
                 && pl.getHealth() <= 0) {
                 name = pl.getName().getString();
                 return true;
