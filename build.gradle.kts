@@ -37,13 +37,6 @@ dependencies {
 
 loom {
     accessWidenerPath = file("src/main/resources/blackout.accesswidener")
-
-    runConfigs.all {
-        ideConfigGenerated(true)
-        vmArgs("-Xmx2G", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseG1GC")
-        // Fix for AMD GPUs and render system initialization issues
-        vmArgs("-Dloader.gameJarPath.inject=true")
-    }
 }
 
 tasks {
